@@ -9,6 +9,10 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    @keyframes fadeInSuccess {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
 
     body {
       font-family: Arial, sans-serif;
@@ -39,7 +43,7 @@
       display: block;
       margin-top: 15px;
     }
-    input, select {
+    input, select, textarea {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -53,6 +57,7 @@
     }
     .button-group {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
       margin-top: 20px;
     }
@@ -71,6 +76,7 @@
     .success {
       color: lightgreen;
       margin-top: 15px;
+      animation: fadeInSuccess 0.6s ease forwards;
     }
     .logo {
       width: 100px;
@@ -78,61 +84,167 @@
       margin-bottom: 20px;
       animation: fadeInUp 0.8s ease;
     }
+    .error {
+      color: yellow;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+    .tooltip {
+      position: relative;
+      cursor: help;
+    }
+    .tooltip:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 125%;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 5px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Site Logo" class="logo">
-  <h2>Selenium Practice Form</h2>
-  <form id="practice-form">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Site Logo" class="logo" data-testid="logo">
+  <h2 data-testid="form-title">Selenium Practice Form</h2>
+  <form id="practice-form" data-testid="practice-form">
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
+    <input type="text" id="name" name="name" required data-testid="input-name">
+    <div id="name-error" class="error" data-testid="error-name"></div>
 
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
+    <input type="email" id="email" name="email" required data-testid="input-email">
+    <div id="email-error" class="error" data-testid="error-email"></div>
 
     <label for="phone">Phone Number:</label>
-    <input type="tel" id="phone" name="phone" required>
+    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" data-testid="input-phone">
+    <div id="phone-error" class="error" data-testid="error-phone"></div>
 
     <label for="dropdown">Select Department:</label>
-    <select id="dropdown" name="dropdown">
+    <select id="dropdown" name="dropdown" data-testid="select-department">
       <option value="qa">QA</option>
       <option value="dev">Development</option>
       <option value="hr">HR</option>
     </select>
 
     <label>Gender:</label>
-    <div class="radio-group">
-      <label><input type="radio" name="gender" value="male"> Male</label>
-      <label><input type="radio" name="gender" value="female"> Female</label>
+    <div class="radio-group" data-testid="radio-gender">
+      <label><input type="radio" name="gender" value="male" data-testid="gender-male"> Male</label>
+      <label><input type="radio" name="gender" value="female" data-testid="gender-female"> Female</label>
     </div>
 
     <label>Interests:</label>
-    <div class="checkbox-group">
-      <label><input type="checkbox" name="interest" value="coding"> Coding</label>
-      <label><input type="checkbox" name="interest" value="testing"> Testing</label>
-      <label><input type="checkbox" name="interest" value="design"> Design</label>
+    <div class="checkbox-group" data-testid="checkbox-interests">
+      <label><input type="checkbox" name="interest" value="coding" data-testid="interest-coding"> Coding</label>
+      <label><input type="checkbox" name="interest" value="testing" data-testid="interest-testing"> Testing</label>
+      <label><input type="checkbox" name="interest" value="design" data-testid="interest-design"> Design</label>
     </div>
 
     <label for="file-upload">Upload File (.pdf or .jpg only):</label>
-    <input type="file" id="file-upload" name="file-upload" accept=".pdf,.jpg">
+    <input type="file" id="file-upload" name="file-upload" accept=".pdf,.jpg" data-testid="file-upload">
+    <div id="file-error" class="error" data-testid="error-file"></div>
 
-    <div class="button-group">
-      <button type="submit">Submit</button>
-      <button type="button" onclick="clearForm()">Reset</button>
+    <label for="date-picker">Pick a Date:</label>
+    <input type="date" id="date-picker" name="date-picker" data-testid="date-picker">
+
+    <label for="slider">Rate Us (1 to 10):</label>
+    <input type="range" id="slider" name="slider" min="1" max="10" data-testid="slider">
+
+    <label for="comments" class="tooltip" data-tooltip="Enter additional information here">Comments:</label>
+    <textarea id="comments" name="comments" rows="4" data-testid="textarea-comments"></textarea>
+
+    <label for="dynamic-content">Dynamic Content:</label>
+    <div id="dynamic-content" data-testid="dynamic-content">
+      <button type="button" onclick="loadDynamic()" data-testid="btn-load-dynamic">Load More Info</button>
     </div>
 
-    <p class="success" id="success-message" style="display: none;">Form submitted successfully!</p>
+    <div class="button-group">
+      <button type="submit" data-testid="btn-submit">Submit</button>
+      <button type="button" onclick="clearForm()" data-testid="btn-reset">Reset</button>
+      <button type="button" onclick="showAlert()" data-testid="btn-alert">Show Alert</button>
+      <button type="button" onclick="openModal()" data-testid="btn-modal">Open Modal</button>
+    </div>
+
+    <p class="success" id="success-message" style="display: none;" data-testid="success-message">Form submitted successfully!</p>
   </form>
+
+  <!-- Modal -->
+  <div id="myModal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center;" data-testid="modal">
+    <div style="background: white; color: black; padding: 20px; border-radius: 10px; text-align: center; min-width: 300px;">
+      <p>This is a modal window for testing.</p>
+      <button onclick="closeModal()" data-testid="btn-close-modal">Close</button>
+    </div>
+  </div>
 
   <script>
     document.getElementById("practice-form").addEventListener("submit", function(event) {
       event.preventDefault();
-      document.getElementById("success-message").style.display = "block";
+
+      document.getElementById("name-error").textContent = "";
+      document.getElementById("email-error").textContent = "";
+      document.getElementById("phone-error").textContent = "";
+      document.getElementById("file-error").textContent = "";
+
+      let isValid = true;
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const fileInput = document.getElementById("file-upload");
+      const file = fileInput.files[0];
+
+      if (name.length < 2) {
+        document.getElementById("name-error").textContent = "Name must be at least 2 characters.";
+        isValid = false;
+      }
+
+      if (!/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById("email-error").textContent = "Enter a valid email address.";
+        isValid = false;
+      }
+
+      if (!/^\d{10}$/.test(phone)) {
+        document.getElementById("phone-error").textContent = "Enter a valid 10-digit phone number.";
+        isValid = false;
+      }
+
+      if (file) {
+        const validTypes = ["application/pdf", "image/jpeg"];
+        if (!validTypes.includes(file.type)) {
+          alert("Invalid file type. Please upload a PDF or JPG file.");
+          fileInput.value = "";
+          isValid = false;
+        }
+      }
+
+      document.getElementById("success-message").style.display = isValid ? "block" : "none";
     });
 
     function clearForm() {
       document.getElementById("practice-form").reset();
       document.getElementById("success-message").style.display = "none";
+      document.getElementById("name-error").textContent = "";
+      document.getElementById("email-error").textContent = "";
+      document.getElementById("phone-error").textContent = "";
+      document.getElementById("file-error").textContent = "";
+    }
+
+    function showAlert() {
+      alert("This is a test alert for Selenium!");
+    }
+
+    function openModal() {
+      document.getElementById("myModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+    }
+
+    function loadDynamic() {
+      const dynamicDiv = document.getElementById("dynamic-content");
+      dynamicDiv.innerHTML += '<p data-testid="dynamic-paragraph">Loaded dynamic content successfully!</p>';
     }
   </script>
 </body>
