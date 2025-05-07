@@ -1,200 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Selenium Practice Site</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Automation Testing Demo Website</title>
   <style>
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInSuccess {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #6a11cb, #2575fc);
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    h2 {
-      margin-bottom: 20px;
-      animation: fadeInUp 1s ease;
-    }
-    form {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      max-width: 500px;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      animation: fadeInUp 1.2s ease;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-    }
-    input, select, textarea {
+    .container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      max-width: 600px;
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button {
+      background: #007BFF;
       border: none;
-      border-radius: 5px;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
-    .checkbox-group, .radio-group {
-      display: flex;
-      gap: 10px;
-      margin-top: 5px;
+
+    button:hover {
+      background: #0056b3;
     }
-    .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+
+    form {
+      text-align: left;
       margin-top: 20px;
     }
-    button {
-      padding: 10px 20px;
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 8px;
       border: none;
-      border-radius: 5px;
-      background-color: #fff;
-      color: #2575fc;
-      cursor: pointer;
-      font-weight: bold;
+      outline: none;
     }
-    button:hover {
-      background-color: #e0e0e0;
-    }
-    .success {
-      color: lightgreen;
-      margin-top: 15px;
-      animation: fadeInSuccess 0.6s ease forwards;
-    }
-    .logo {
-      width: 100px;
-      height: auto;
-      margin-bottom: 20px;
-      animation: fadeInUp 0.8s ease;
-    }
-    .error {
-      color: yellow;
-      font-size: 0.9em;
+
+    .radio-group {
+      display: flex;
+      gap: 15px;
       margin-top: 5px;
     }
-    .tooltip {
-      position: relative;
-      cursor: help;
-    }
-    .tooltip:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 125%;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 5px;
-      border-radius: 4px;
-      white-space: nowrap;
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Site Logo" class="logo">
-  <h2>Selenium Practice Form</h2>
-  <form id="practice-form">
-    <!-- Form fields -->
-    <!-- [Fields omitted for brevity, unchanged in this edit] -->
-
-    <label for="dynamic-content">Dynamic Content:</label>
-    <div id="dynamic-content">
-      <button type="button" onclick="loadDynamic()">Load More Info</button>
+  <div class="container">
+    <div id="welcome">
+      <h1>Automation Testing Demo Website</h1>
+      <p>Welcoming the users to the automation testing demo website.<br>Click continue to move further.</p>
+      <button onclick="showForm()">Continue</button>
     </div>
 
-    <div class="button-group">
-      <button type="submit">Submit</button>
-      <button type="button" onclick="clearForm()">Reset</button>
-      <button type="button" onclick="showAlert()">Show Alert</button>
-      <button type="button" onclick="openModal()">Open Modal</button>
-    </div>
+    <form id="userForm" class="hidden">
+      <label>Full Name</label>
+      <input type="text" name="name" required />
 
-    <p class="success" id="success-message" style="display: none;">Form submitted successfully!</p>
-  </form>
+      <label>Phone Number</label>
+      <input type="tel" name="phone" required />
 
-  <!-- Modal -->
-  <div id="myModal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center;">
-    <div style="background: white; color: black; padding: 20px; border-radius: 10px; text-align: center; min-width: 300px;">
-      <p>This is a modal window for testing.</p>
-      <button onclick="closeModal()">Close</button>
-    </div>
+      <label>Email ID</label>
+      <input type="email" name="email" required />
+
+      <label>Gender</label>
+      <div class="radio-group">
+        <label><input type="radio" name="gender" value="Male" required /> Male</label>
+        <label><input type="radio" name="gender" value="Female" /> Female</label>
+        <label><input type="radio" name="gender" value="Other" /> Other</label>
+      </div>
+
+      <label>Address</label>
+      <input type="text" name="address" required />
+
+      <label>City</label>
+      <select name="city" required>
+        <option value="">Select City</option>
+        <option>Mumbai</option><option>Delhi</option><option>Bengaluru</option><option>Hyderabad</option>
+        <option>Ahmedabad</option><option>Chennai</option><option>Kolkata</option><option>Pune</option>
+        <option>Jaipur</option><option>Surat</option><option>Lucknow</option><option>Kanpur</option>
+        <option>Nagpur</option><option>Indore</option><option>Thane</option>
+      </select>
+
+      <label>State</label>
+      <select name="state" required>
+        <option value="">Select State</option>
+        <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option><option>Chhattisgarh</option>
+        <option>Goa</option><option>Gujarat</option><option>Haryana</option><option>Karnataka</option>
+        <option>Kerala</option><option>Maharashtra</option><option>Madhya Pradesh</option><option>Odisha</option>
+        <option>Punjab</option><option>Rajasthan</option><option>Tamil Nadu</option><option>Telangana</option>
+        <option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option>
+      </select>
+
+      <label>Country</label>
+      <select name="country" required>
+        <option value="">Select Country</option>
+        <option>India</option><option>United States</option><option>Canada</option><option>Australia</option>
+        <option>United Kingdom</option><option>Germany</option><option>France</option><option>Japan</option>
+      </select>
+
+      <button type="submit" style="margin-top: 15px;">Submit</button>
+    </form>
   </div>
 
   <script>
-    document.getElementById("practice-form").addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      document.getElementById("name-error").textContent = "";
-      document.getElementById("email-error").textContent = "";
-      document.getElementById("phone-error").textContent = "";
-
-      let isValid = true;
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-
-      if (name.length < 2) {
-        document.getElementById("name-error").textContent = "Name must be at least 2 characters.";
-        isValid = false;
-      }
-
-      if (!/^\S+@\S+\.\S+$/.test(email)) {
-        document.getElementById("email-error").textContent = "Enter a valid email address.";
-        isValid = false;
-      }
-
-      if (!/^\d{10}$/.test(phone)) {
-        document.getElementById("phone-error").textContent = "Enter a valid 10-digit phone number.";
-        isValid = false;
-      }
-
-      document.getElementById("success-message").style.display = isValid ? "block" : "none";
-    });
-
-    function clearForm() {
-      document.getElementById("practice-form").reset();
-      document.getElementById("success-message").style.display = "none";
-      document.getElementById("name-error").textContent = "";
-      document.getElementById("email-error").textContent = "";
-      document.getElementById("phone-error").textContent = "";
-    }
-
-    function showAlert() {
-      alert("This is a test alert for Selenium!");
-    }
-
-    function openModal() {
-      document.getElementById("myModal").style.display = "flex";
-    }
-
-    function closeModal() {
-      document.getElementById("myModal").style.display = "none";
-    }
-
-    function loadDynamic() {
-      const dynamicDiv = document.getElementById("dynamic-content");
-      if (!document.getElementById("dynamic-loaded")) {
-        const message = document.createElement("p");
-        message.id = "dynamic-loaded";
-        message.textContent = "Loaded dynamic content successfully!";
-        dynamicDiv.appendChild(message);
-      }
+    function showForm() {
+      document.getElementById('welcome').classList.add('hidden');
+      document.getElementById('userForm').classList.remove('hidden');
     }
   </script>
 </body>
