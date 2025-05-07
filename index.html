@@ -8,144 +8,168 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      background: linear-gradient(to right, #2c3e50, #3498db);
       color: white;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      overflow: hidden;
+      transition: all 0.3s ease;
     }
-
     .container {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 2rem;
+      border-radius: 1rem;
       max-width: 600px;
       width: 100%;
-      text-align: center;
-      animation: fadeIn 1.5s ease-in-out;
+      animation: fadeIn 1s ease;
     }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    button {
-      background: #007BFF;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #0056b3;
-    }
-
-    form {
-      text-align: left;
-      margin-top: 20px;
-    }
-
-    label {
-      display: block;
-      margin-top: 10px;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-    }
-
-    .radio-group {
-      display: flex;
-      gap: 15px;
-      margin-top: 5px;
-    }
-
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-30px); }
+      from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    h1, h2 { text-align: center; }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border-radius: 0.4rem;
+      border: none;
+      margin-bottom: 1rem;
+    }
+    button {
+      background-color: #27ae60;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      display: block;
+      margin: 1rem auto 0;
+    }
+    .hidden { display: none; }
+    .success { text-align: center; font-size: 1.2rem; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="welcome">
-      <h1>Automation Testing Demo Website</h1>
-      <p>Welcoming the users to the automation testing demo website.<br>Click continue to move further.</p>
-      <button onclick="showForm()">Continue</button>
-    </div>
 
-    <form id="userForm" class="hidden">
-      <label>Full Name</label>
-      <input type="text" name="name" required />
+<div class="container" id="step1">
+  <h1>Automation Testing Demo Website</h1>
+  <p style="text-align: center;">Welcoming the users to the automation testing demo website.<br/>Click continue to move further.</p>
+  <button onclick="nextStep(2)">Continue</button>
+</div>
 
-      <label>Phone Number</label>
-      <input type="tel" name="phone" required />
+<div class="container hidden" id="step2">
+  <h2>Personal Details</h2>
+  <form id="form1">
+    <input type="text" name="name" placeholder="Full Name" pattern="[A-Za-z ]+" required />
+    <input type="text" name="phone" placeholder="Phone Number" pattern="\\d{10}" required />
+    <input type="email" name="email" placeholder="Email ID" required />
 
-      <label>Email ID</label>
-      <input type="email" name="email" required />
+    <label>Gender:</label><br/>
+    <label><input type="radio" name="gender" value="Male" required /> Male</label>
+    <label><input type="radio" name="gender" value="Female" required /> Female</label>
+    <label><input type="radio" name="gender" value="Other" required /> Other</label><br/>
 
-      <label>Gender</label>
-      <div class="radio-group">
-        <label><input type="radio" name="gender" value="Male" required /> Male</label>
-        <label><input type="radio" name="gender" value="Female" /> Female</label>
-        <label><input type="radio" name="gender" value="Other" /> Other</label>
-      </div>
+    <textarea name="address" placeholder="Address" required></textarea>
 
-      <label>Address</label>
-      <input type="text" name="address" required />
+    <select name="city" required>
+      <option value="">Select City</option>
+      <option>Mumbai</option>
+      <option>Delhi</option>
+      <option>Bangalore</option>
+      <!-- Add all cities of India here -->
+    </select>
 
-      <label>City</label>
-      <select name="city" required>
-        <option value="">Select City</option>
-        <option>Mumbai</option><option>Delhi</option><option>Bengaluru</option><option>Hyderabad</option>
-        <option>Ahmedabad</option><option>Chennai</option><option>Kolkata</option><option>Pune</option>
-        <option>Jaipur</option><option>Surat</option><option>Lucknow</option><option>Kanpur</option>
-        <option>Nagpur</option><option>Indore</option><option>Thane</option>
-      </select>
+    <select name="state" required>
+      <option value="">Select State</option>
+      <option>Maharashtra</option>
+      <option>Karnataka</option>
+      <option>Delhi</option>
+      <!-- Add all Indian states here -->
+    </select>
 
-      <label>State</label>
-      <select name="state" required>
-        <option value="">Select State</option>
-        <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option><option>Chhattisgarh</option>
-        <option>Goa</option><option>Gujarat</option><option>Haryana</option><option>Karnataka</option>
-        <option>Kerala</option><option>Maharashtra</option><option>Madhya Pradesh</option><option>Odisha</option>
-        <option>Punjab</option><option>Rajasthan</option><option>Tamil Nadu</option><option>Telangana</option>
-        <option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option>
-      </select>
+    <select name="country" required>
+      <option value="">Select Country</option>
+      <option>India</option>
+      <option>United States</option>
+      <option>United Kingdom</option>
+      <option>Canada</option>
+      <!-- More countries -->
+    </select>
 
-      <label>Country</label>
-      <select name="country" required>
-        <option value="">Select Country</option>
-        <option>India</option><option>United States</option><option>Canada</option><option>Australia</option>
-        <option>United Kingdom</option><option>Germany</option><option>France</option><option>Japan</option>
-      </select>
+    <button type="submit">Continue to Professional Details</button>
+  </form>
+</div>
 
-      <button type="submit" style="margin-top: 15px;">Submit</button>
-    </form>
-  </div>
+<div class="container hidden" id="step3">
+  <h2>Professional Details</h2>
+  <form id="form2">
+    <input type="text" name="experience" placeholder="Work Experience" required />
+    <input type="text" name="previousCompany" placeholder="Previous Company Name" required />
+    <input type="text" name="domain" placeholder="Domain" required />
+    <label>Date of Joining:</label>
+    <input type="date" name="doj" required />
+    <label>Date of Relieving:</label>
+    <input type="date" name="dor" required />
 
-  <script>
-    function showForm() {
-      document.getElementById('welcome').classList.add('hidden');
-      document.getElementById('userForm').classList.remove('hidden');
+    <label>Interest of Work:</label><br/>
+    <label><input type="checkbox" name="interest" value="Developer" /> Developer</label><br/>
+    <label><input type="checkbox" name="interest" value="Tester" /> Tester</label><br/>
+    <label><input type="checkbox" name="interest" value="UI/UX" /> UI/UX</label><br/>
+
+    <button type="submit">Next</button>
+  </form>
+</div>
+
+
+<div class="container hidden" id="step4">
+  <h2>Upload Resume</h2>
+  <form id="form3">
+    <input type="file" name="resume" accept=".pdf,.jpg,.jpeg" required />
+    <button type="submit">Submit Application</button>
+  </form>
+</div>
+
+<div class="container hidden" id="success">
+  <h2 class="success">Your application has been submitted successfully!</h2>
+  <button onclick="nextStep(1)">Return to Home</button>
+</div>
+
+<script>
+  function nextStep(step) {
+    document.querySelectorAll('.container').forEach(div => div.classList.add('hidden'));
+    document.getElementById(`step${step}`).classList.remove('hidden');
+  }
+
+  document.getElementById("form1").onsubmit = function(e) {
+    e.preventDefault();
+    nextStep(3);
+  };
+
+  document.getElementById("form2").onsubmit = function(e) {
+    e.preventDefault();
+    nextStep(4);
+  };
+
+  document.getElementById("form3").onsubmit = function(e) {
+    e.preventDefault();
+    const file = document.querySelector('input[type="file"]').files[0];
+    if (!file) {
+      alert("Please upload a file.");
+      return;
     }
-  </script>
+    if (!["application/pdf", "image/jpeg", "image/jpg"].includes(file.type)) {
+      alert("Only PDF or JPG files are allowed.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      alert("File size must be 5MB or less.");
+      return;
+    }
+    nextStep("success");
+  };
+</script>
+
 </body>
 </html>
