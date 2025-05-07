@@ -151,15 +151,6 @@
 </select>
 
 
-    <div>
-  <label class="block mb-1">Country</label>
-  <input 
-    type="text" 
-    id="country-search" 
-    class="w-full px-4 py-2 rounded text-black mb-2" 
-    placeholder="Search for a country" 
-    onkeyup="filterCountries()"
-  />
     <select name="country" required>
   <option value="">Select Country</option>
   <option value="Afghanistan">Afghanistan</option>
@@ -351,26 +342,7 @@
   <option value="Uzbekistan">Uzbekistan</option>
   <option value
     </select>
-</div>
 
-<script>
-  function filterCountries() {
-    let input = document.getElementById('country-search');
-    let filter = input.value.toLowerCase();
-    let dropdown = document.getElementById('country-dropdown');
-    let options = dropdown.getElementsByTagName('option');
-
-    for (let i = 0; i < options.length; i++) {
-      let option = options[i];
-      let country = option.text.toLowerCase();
-      if (country.indexOf(filter) > -1) {
-        option.style.display = ''; // Show matching options
-      } else {
-        option.style.display = 'none'; // Hide non-matching options
-      }
-    }
-  }
-</script>
 
 
     <button type="submit">Continue to Professional Details</button>
