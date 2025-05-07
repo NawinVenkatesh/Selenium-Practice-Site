@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selenium Practice Site</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    form { max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+    label { display: block; margin-top: 15px; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; }
+    .checkbox-group, .radio-group { display: flex; gap: 10px; margin-top: 5px; }
+    .button-group { display: flex; gap: 10px; margin-top: 15px; }
+    button { padding: 10px 15px; }
+    .success { color: green; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <h2>Selenium Practice Form</h2>
+  <form id="practice-form">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required>
+
+    <label for="dropdown">Select Department:</label>
+    <select id="dropdown" name="dropdown">
+      <option value="qa">QA</option>
+      <option value="dev">Development</option>
+      <option value="hr">HR</option>
+    </select>
+
+    <label>Gender:</label>
+    <div class="radio-group">
+      <label><input type="radio" name="gender" value="male"> Male</label>
+      <label><input type="radio" name="gender" value="female"> Female</label>
+    </div>
+
+    <label>Interests:</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="interest" value="coding"> Coding</label>
+      <label><input type="checkbox" name="interest" value="testing"> Testing</label>
+      <label><input type="checkbox" name="interest" value="design"> Design</label>
+    </div>
+
+    <label for="file-upload">Upload File (.pdf or .jpg only):</label>
+    <input type="file" id="file-upload" name="file-upload" accept=".pdf,.jpg">
+
+    <div class="button-group">
+      <button type="submit">Submit</button>
+      <button type="button" onclick="clearForm()">Reset</button>
+    </div>
+
+    <p class="success" id="success-message" style="display: none;">Form submitted successfully!</p>
+  </form>
+
+  <script>
+    document.getElementById("practice-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      document.getElementById("success-message").style.display = "block";
+    });
+
+    function clearForm() {
+      document.getElementById("practice-form").reset();
+      document.getElementById("success-message").style.display = "none";
+    }
+  </script>
+</body>
+</html>
