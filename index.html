@@ -69,7 +69,6 @@
     .form-group {
   margin-bottom: 20px;
 }
-
 .gender-options-wrapper {
   display: flex;
   justify-content: center;
@@ -79,15 +78,17 @@
 .gender-options {
   display: flex;
   gap: 40px;
+  flex-wrap: wrap; /* Ensures no overlap on smaller screens */
 }
 
-.gender-options label {
+.gender-label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 16px;
-  cursor: pointer;
+  white-space: nowrap;
 }
+
   </style>
 </head>
 <body>
@@ -119,26 +120,24 @@
           <input type="email" id="email" name="email" required>
         </div>
 
-  <div class="form-group">
+        <div class="form-group">
   <label for="gender" class="form-label">Gender</label>
   <div class="gender-options-wrapper">
     <div class="gender-options">
-      <label for="male">
+      <label for="male" class="gender-label">
         <input type="radio" id="male" name="gender" value="Male"> Male
       </label>
-      <label for="female">
+      <label for="female" class="gender-label">
         <input type="radio" id="female" name="gender" value="Female"> Female
       </label>
-      <label for="other">
+      <label for="other" class="gender-label">
         <input type="radio" id="other" name="gender" value="Other"> Other
       </label>
     </div>
   </div>
 </div>
 
-
-
-
+  
         <div class="form-group">
           <label for="address">Address</label>
           <textarea id="address" name="address" required></textarea>
