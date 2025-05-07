@@ -1,257 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Automation Testing Demo Website</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #4c6ef5, #2f6c9b);
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #141e30, #243b55);
       color: white;
-      text-align: center;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
     .container {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 30px;
-      border-radius: 15px;
-      width: 80%;
       max-width: 800px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      margin: 0 auto;
+      padding: 20px;
     }
-    .button {
-      background-color: #28a745;
-      border: none;
-      padding: 15px 30px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 8px;
-      margin-top: 20px;
+    .form-section {
+      margin-bottom: 30px;
     }
-    .button:hover {
-      background-color: #218838;
+    .form-group {
+      margin-bottom: 15px;
     }
-    input, select, textarea {
+    .form-label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-input, .form-select, .form-textarea {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
+      border: none;
       border-radius: 5px;
-      border: 1px solid #ccc;
+      font-size: 16px;
     }
-    h1 {
-      font-size: 30px;
-      font-weight: bold;
-      margin-bottom: 20px;
+    .form-textarea {
+      resize: vertical;
     }
-    .section {
-      display: none;
+    .button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
     }
-    .section.active {
-      display: block;
+    .button:hover {
+      background-color: #45a049;
     }
-    .radio-group label {
-      margin-right: 20px;
+    .center-text {
+      text-align: center;
     }
-    .form-group {
-      margin-bottom: 20px;
+    .gender-options-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 8px;
     }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 80%;
-      margin: 0 auto;
+    .gender-options {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
     }
-    .form-group {
-  margin-bottom: 20px;
-}
-.gender-options-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 8px;
-}
-
-.gender-options {
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap; /* Ensures no overlap on smaller screens */
-}
-
-.gender-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  white-space: nowrap;
-}
-
+    .gender-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <!-- First Section: Welcome Page -->
-    <div id="section1" class="section active">
-      <h1>Welcome to the Automation Testing Demo Website</h1>
-      <p>Click continue to move further.</p>
-      <button class="button" onclick="goToSection(2)">Continue</button>
+  <div class="container center-text">
+    <h1>Automation Testing Demo Website</h1>
+    <div id="page1" class="form-section">
+      <p>Welcoming the users to the automation testing demo website.<br />Click continue to move further.</p>
+      <button class="button" onclick="goToPage(2)">Continue</button>
     </div>
 
-    <!-- Second Section: User Details -->
-    <div id="section2" class="section">
-      <h1>Enter Your Details</h1>
-      <form id="userDetailsForm">
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" required>
+    <form id="page2" class="form-section" style="display: none;">
+      <div class="form-group">
+        <label for="fullname" class="form-label">Full Name</label>
+        <input type="text" id="fullname" name="fullname" class="form-input" required />
+      </div>
+      <div class="form-group">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="tel" id="phone" name="phone" class="form-input" pattern="[0-9]{10}" required />
+      </div>
+      <div class="form-group">
+        <label for="email" class="form-label">Email ID</label>
+        <input type="email" id="email" name="email" class="form-input" required />
+      </div>
+      <div class="form-group">
+        <label for="gender" class="form-label">Gender</label>
+        <div class="gender-options-wrapper">
+          <div class="gender-options">
+            <label for="male" class="gender-label">
+              <input type="radio" id="male" name="gender" value="Male"> Male
+            </label>
+            <label for="female" class="gender-label">
+              <input type="radio" id="female" name="gender" value="Female"> Female
+            </label>
+            <label for="other" class="gender-label">
+              <input type="radio" id="other" name="gender" value="Other"> Other
+            </label>
+          </div>
         </div>
-
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="text" id="phone" name="phone" required pattern="^[0-9]{10}$">
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email ID</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-
-        <div class="form-group">
-  <label for="gender" class="form-label">Gender</label>
-  <div class="gender-options-wrapper">
-    <div class="gender-options">
-      <label for="male" class="gender-label">
-        <input type="radio" id="male" name="gender" value="Male"> Male
-      </label>
-      <label for="female" class="gender-label">
-        <input type="radio" id="female" name="gender" value="Female"> Female
-      </label>
-      <label for="other" class="gender-label">
-        <input type="radio" id="other" name="gender" value="Other"> Other
-      </label>
-    </div>
-  </div>
-</div>
-
-  
-        <div class="form-group">
-          <label for="address">Address</label>
-          <textarea id="address" name="address" required></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="city">City</label>
-          <select id="city" name="city" required>
-            <option value="">Select City</option>
-            <option value="Ariyalur">Ariyalur</option>
-            <option value="Chennai">Chennai</option>
-            <option value="Coimbatore">Coimbatore</option>
-            <option value="Erode">Erode</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="state">State</label>
-          <select id="state" name="state" required>
-            <option value="">Select State</option>
-            <option value="Andhra Pradesh">Andhra Pradesh</option>
-            <option value="Maharashtra">Maharashtra</option>
-            <option value="Karnataka">Karnataka</option>
-            <option value="Tamil Nadu">Tamil Nadu</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="country">Country</label>
-          <select id="country" name="country" required>
-            <option value="">Select Country</option>
-            <option value="India">India</option>
-            <option value="United States">United States</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="Canada">Canada</option>
-            <option value="Australia">Australia</option>
-          </select>
-        </div>
-        
-        <button type="button" class="button" onclick="goToSection(3)">Continue to Professional Details</button>
-      </form>
-    </div>
-
-    <!-- Third Section: Professional Details -->
-    <div id="section3" class="section">
-      <h1>Professional Details</h1>
-      <form id="professionalDetailsForm">
-        <div class="form-group">
-          <label for="workExperience">Work Experience</label>
-          <textarea id="workExperience" name="workExperience" required></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label for="previousCompany">Previous Company Name</label>
-          <input type="text" id="previousCompany" name="previousCompany" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="domain">Domain</label>
-          <input type="text" id="domain" name="domain" required>
-        </div>
-
-        <div class="form-group">
-          <label for="doj">Date of Joining</label>
-          <input type="date" id="doj" name="doj" required>
-        </div>
-
-        <div class="form-group">
-          <label for="dor">Date of Relieving</label>
-          <input type="date" id="dor" name="dor" required>
-        </div>
-
-        <button type="button" class="button" onclick="goToSection(4)">Next</button>
-      </form>
-    </div>
-
-    <!-- Fourth Section: Upload Resume -->
-    <div id="section4" class="section">
-      <h1>Upload Resume</h1>
-      <form id="uploadResumeForm">
-        <div class="form-group">
-          <label for="resume">Upload Resume (PDF or JPG, max 5MB)</label>
-          <input type="file" id="resume" name="resume" accept="application/pdf,image/*" required>
-        </div>
-        <button type="button" class="button" onclick="submitApplication()">Submit Application</button>
-      </form>
-    </div>
-
-    <!-- Final Message -->
-    <div id="section5" class="section">
-      <h1>Your Application is Submitted Successfully!</h1>
-      <p>Click below to return to the main page.</p>
-      <button class="button" onclick="goToSection(1)">Go to Main Page</button>
-    </div>
+      </div>
+      <div class="form-group">
+        <label for="address" class="form-label">Address</label>
+        <textarea id="address" name="address" class="form-textarea" rows="3" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="city" class="form-label">City</label>
+        <select id="city" name="city" class="form-select" required>
+          <option value="">Select City</option>
+          <option>Chennai</option>
+          <option>Coimbatore</option>
+          <option>Madurai</option>
+          <option>Trichy</option>
+          <option>Salem</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="state" class="form-label">State</label>
+        <select id="state" name="state" class="form-select" required>
+          <option value="">Select State</option>
+          <option>Tamil Nadu</option>
+          <option>Kerala</option>
+          <option>Karnataka</option>
+          <option>Andhra Pradesh</option>
+          <option>Telangana</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="country" class="form-label">Country</label>
+        <select id="country" name="country" class="form-select" required>
+          <option value="">Select Country</option>
+          <option>India</option>
+          <option>Indonesia</option>
+          <option>Ireland</option>
+          <option>Italy</option>
+          <option>Israel</option>
+        </select>
+      </div>
+      <button type="button" class="button" onclick="goToPage(3)">Continue to Professional Details</button>
+    </form>
   </div>
 
   <script>
-    function goToSection(section) {
-      // Hide all sections
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(sec => sec.classList.remove('active'));
-
-      // Show the active section
-      const activeSection = document.getElementById('section' + section);
-      activeSection.classList.add('active');
-    }
-
-    function submitApplication() {
-      // You can add your resume handling logic here (upload, store, etc.)
-
-      // After successful submission, show success message
-      goToSection(5);
+    function goToPage(pageNumber) {
+      for (let i = 1; i <= 3; i++) {
+        const page = document.getElementById("page" + i);
+        if (page) page.style.display = i === pageNumber ? "block" : "none";
+      }
     }
   </script>
-
 </body>
 </html>
