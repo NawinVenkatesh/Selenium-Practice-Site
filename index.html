@@ -70,18 +70,21 @@
   margin-bottom: 20px;
 }
 
+.gender-options-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
 .gender-options {
   display: flex;
-  align-items: center;
-  flex-direction: row;
-  gap: 50px;
-  margin-top: 8px;
+  gap: 40px;
 }
 
 .gender-options label {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 16px;
   cursor: pointer;
 }
@@ -116,20 +119,23 @@
           <input type="email" id="email" name="email" required>
         </div>
 
-   <div class="form-group">
-  <label for="gender">Gender</label>
-  <div class="gender-options">
-    <label for="male">
-      <input type="radio" id="male" name="gender" value="Male"> Male
-    </label>
-    <label for="female">
-      <input type="radio" id="female" name="gender" value="Female"> Female
-    </label>
-    <label for="other">
-      <input type="radio" id="other" name="gender" value="Other"> Other
-    </label>
+  <div class="form-group">
+  <label for="gender" class="form-label">Gender</label>
+  <div class="gender-options-wrapper">
+    <div class="gender-options">
+      <label for="male">
+        <input type="radio" id="male" name="gender" value="Male"> Male
+      </label>
+      <label for="female">
+        <input type="radio" id="female" name="gender" value="Female"> Female
+      </label>
+      <label for="other">
+        <input type="radio" id="other" name="gender" value="Other"> Other
+      </label>
+    </div>
   </div>
 </div>
+
 
 
 
