@@ -5,14 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Selenium Practice Site</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    form { max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
-    label { display: block; margin-top: 15px; }
-    input, select { width: 100%; padding: 8px; margin-top: 5px; }
-    .checkbox-group, .radio-group { display: flex; gap: 10px; margin-top: 5px; }
-    .button-group { display: flex; gap: 10px; margin-top: 15px; }
-    button { padding: 10px 15px; }
-    .success { color: green; margin-top: 15px; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      max-width: 500px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 5px;
+    }
+    .checkbox-group, .radio-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #fff;
+      color: #2575fc;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #e0e0e0;
+    }
+    .success {
+      color: lightgreen;
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
@@ -47,7 +99,7 @@
       <label><input type="checkbox" name="interest" value="design"> Design</label>
     </div>
 
-    <label for="file-upload">Upload Your Resume File (.pdf or .jpg only):</label>
+    <label for="file-upload">Upload File (.pdf or .jpg only):</label>
     <input type="file" id="file-upload" name="file-upload" accept=".pdf,.jpg">
 
     <div class="button-group">
